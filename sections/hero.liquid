@@ -1,0 +1,87 @@
+<div class="hero-section" data-section-id="{{ section.id }}" data-section-type="hero-section">
+  <div class="hero-container">
+    {% if section.settings.image %}
+      <div class="hero-image">
+        <img 
+          src="{{ section.settings.image | image_url }}" 
+          alt="{{ section.settings.heading | escape }}"
+          class="hero-img"
+          width="{{ section.settings.image.width | default: 1920 }}"
+          height="{{ section.settings.image.height | default: 1080 }}"
+          loading="eager"
+        >
+      </div>
+    {% else %}
+      <div class="hero-placeholder"></div>
+    {% endif %}
+    
+    <div class="hero-content">
+      {% if section.settings.heading != blank %}
+        <h2 class="hero-heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+      
+      {% if section.settings.button_1_label != blank or section.settings.button_2_label != blank %}
+        <div class="hero-buttons">
+          {% if section.settings.button_1_label != blank %}
+            <a href="{{ section.settings.button_1_link }}" class="hero-button">
+              {{ section.settings.button_1_label | escape }}
+            </a>
+          {% endif %}
+          
+          {% if section.settings.button_2_label != blank %}
+            <a href="{{ section.settings.button_2_link }}" class="hero-button">
+              {{ section.settings.button_2_label | escape }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Introducing Fancy People"
+    },
+    {
+      "type": "text",
+      "id": "button_1_label",
+      "label": "First button label",
+      "default": "SHOP WOMEN"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "First button link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Second button label",
+      "default": "SHOP MEN"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Second button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

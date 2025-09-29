@@ -1,0 +1,742 @@
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      
+      <!-- Help Section -->
+      <div class="footer-column">
+        <h3 class="footer-heading">{{ section.settings.help_heading | default: 'HELP' }}</h3>
+        <ul class="footer-links">
+          {% if section.settings.help_link_1_text != blank %}
+            <li><a href="{{ section.settings.help_link_1_url }}">{{ section.settings.help_link_1_text }}</a></li>
+          {% endif %}
+          {% if section.settings.help_link_2_text != blank %}
+            <li><a href="{{ section.settings.help_link_2_url }}">{{ section.settings.help_link_2_text }}</a></li>
+          {% endif %}
+          {% if section.settings.help_link_3_text != blank %}
+            <li><a href="{{ section.settings.help_link_3_url }}">{{ section.settings.help_link_3_text }}</a></li>
+          {% endif %}
+          {% if section.settings.help_link_4_text != blank %}
+            <li><a href="{{ section.settings.help_link_4_url }}">{{ section.settings.help_link_4_text }}</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <!-- Services Section -->
+      <div class="footer-column">
+        <h3 class="footer-heading">{{ section.settings.services_heading | default: 'SERVICES' }}</h3>
+        <ul class="footer-links">
+          {% if section.settings.services_link_1_text != blank %}
+            <li><a href="{{ section.settings.services_link_1_url }}">{{ section.settings.services_link_1_text }}</a></li>
+          {% endif %}
+          {% if section.settings.services_link_2_text != blank %}
+            <li><a href="{{ section.settings.services_link_2_url }}">{{ section.settings.services_link_2_text }}</a></li>
+          {% endif %}
+          {% if section.settings.services_link_3_text != blank %}
+            <li><a href="{{ section.settings.services_link_3_url }}">{{ section.settings.services_link_3_text }}</a></li>
+          {% endif %}
+          {% if section.settings.services_link_4_text != blank %}
+            <li><a href="{{ section.settings.services_link_4_url }}">{{ section.settings.services_link_4_text }}</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <!-- About Section -->
+      <div class="footer-column">
+        <h3 class="footer-heading">{{ section.settings.about_heading | default: 'ABOUT FANCY PEOPLE' }}</h3>
+        <ul class="footer-links">
+          {% if section.settings.about_link_1_text != blank %}
+            <li><a href="{{ section.settings.about_link_1_url }}">{{ section.settings.about_link_1_text }}</a></li>
+          {% endif %}
+          {% if section.settings.about_link_2_text != blank %}
+            <li><a href="{{ section.settings.about_link_2_url }}">{{ section.settings.about_link_2_text }}</a></li>
+          {% endif %}
+          {% if section.settings.about_link_3_text != blank %}
+            <li><a href="{{ section.settings.about_link_3_url }}">{{ section.settings.about_link_3_text }}</a></li>
+          {% endif %}
+          {% if section.settings.about_link_4_text != blank %}
+            <li><a href="{{ section.settings.about_link_4_url }}">{{ section.settings.about_link_4_text }}</a></li>
+          {% endif %}
+          {% if section.settings.about_link_5_text != blank %}
+            <li><a href="{{ section.settings.about_link_5_url }}">{{ section.settings.about_link_5_text }}</a></li>
+          {% endif %}
+          {% if section.settings.about_link_6_text != blank %}
+            <li><a href="{{ section.settings.about_link_6_url }}">{{ section.settings.about_link_6_text }}</a></li>
+          {% endif %}
+          {% if section.settings.about_link_7_text != blank %}
+            <li><a href="{{ section.settings.about_link_7_url }}">{{ section.settings.about_link_7_text }}</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <!-- Email Signup Section -->
+      <div class="footer-column">
+        <h3 class="footer-heading">{{ section.settings.signup_heading | default: 'EMAIL SIGNUP' }}</h3>
+        <div class="footer-newsletter">
+          {% if section.settings.newsletter_text != blank %}
+            <p class="newsletter-text">{{ section.settings.newsletter_text }}</p>
+          {% endif %}
+          
+          {% if section.settings.newsletter_form %}
+            {% form 'customer' %}
+              <div class="newsletter-form">
+                <input type="email" 
+                       name="contact[email]" 
+                       placeholder="{{ section.settings.email_placeholder | default: 'Enter your email' }}"
+                       class="newsletter-input"
+                       required>
+                <button type="submit" class="newsletter-button">
+                  {{ section.settings.button_text | default: 'Sign up' }}
+                </button>
+              </div>
+            {% endform %}
+          {% endif %}
+          
+          {% if section.settings.show_social_links %}
+            <div class="footer-social">
+              <p class="social-heading">{{ section.settings.social_heading | default: 'Follow Us' }}</p>
+              <div class="social-links">
+                {% if section.settings.facebook_url != blank %}
+                  <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener">Facebook</a>
+                {% endif %}
+                {% if section.settings.instagram_url != blank %}
+                  <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener">Instagram</a>
+                {% endif %}
+                {% if section.settings.twitter_url != blank %}
+                  <a href="{{ section.settings.twitter_url }}" target="_blank" rel="noopener">Twitter</a>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Language/Region Selector -->
+    {% if section.settings.show_language_selector %}
+      <div class="footer-language">
+        <button class="language-selector">
+          🌐 {{ section.settings.language_text | default: 'International (English)' }}
+        </button>
+      </div>
+    {% endif %}
+
+    <!-- Bottom Footer -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        
+        <!-- Copyright and Brand -->
+        <div class="footer-copyright">
+          <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+        </div>
+
+        <!-- Legal Links -->
+        <div class="footer-legal">
+          {% if section.settings.legal_link_1_text != blank %}
+            <a href="{{ section.settings.legal_link_1_url }}">{{ section.settings.legal_link_1_text }}</a>
+          {% endif %}
+          {% if section.settings.legal_link_2_text != blank %}
+            <a href="{{ section.settings.legal_link_2_url }}">{{ section.settings.legal_link_2_text }}</a>
+          {% endif %}
+          {% if section.settings.legal_link_3_text != blank %}
+            <a href="{{ section.settings.legal_link_3_url }}">{{ section.settings.legal_link_3_text }}</a>
+          {% endif %}
+        </div>
+
+        <!-- Payment Icons -->
+        {% if section.settings.show_payment_icons %}
+          <div class="footer-payment">
+            {% for type in shop.enabled_payment_types %}
+              {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+.site-footer {
+  background-color: {{ section.settings.footer_bg_color | default: '#f8f8f8' }};
+  color: {{ section.settings.footer_text_color | default: '#333333' }};
+  padding: 60px 0 20px;
+  font-family: var(--font-body-family);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-heading {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: {{ section.settings.footer_heading_color | default: '#000000' }};
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: {{ section.settings.footer_link_color | default: '#666666' }};
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: {{ section.settings.footer_link_hover_color | default: '#000000' }};
+}
+
+.footer-newsletter {
+  max-width: 300px;
+}
+
+.newsletter-text {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: {{ section.settings.footer_text_color | default: '#666666' }};
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.newsletter-input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background-color: white;
+}
+
+.newsletter-button {
+  padding: 12px 24px;
+  background-color: {{ section.settings.button_bg_color | default: '#000000' }};
+  color: {{ section.settings.button_text_color | default: '#ffffff' }};
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter-button:hover {
+  background-color: {{ section.settings.button_hover_color | default: '#333333' }};
+}
+
+.footer-social {
+  margin-top: 20px;
+}
+
+.social-heading {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  color: {{ section.settings.footer_link_color | default: '#666666' }};
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: {{ section.settings.footer_link_hover_color | default: '#000000' }};
+}
+
+.footer-language {
+  border-top: 1px solid #eee;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+.language-selector {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  color: {{ section.settings.footer_text_color | default: '#666666' }};
+}
+
+.footer-bottom {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-copyright p {
+  font-size: 12px;
+  color: {{ section.settings.footer_text_color | default: '#666666' }};
+  margin: 0;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-legal a {
+  font-size: 12px;
+  color: {{ section.settings.footer_link_color | default: '#666666' }};
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+  color: {{ section.settings.footer_link_hover_color | default: '#000000' }};
+}
+
+.footer-payment {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.payment-icon {
+  height: 20px;
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .footer-bottom-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .footer-legal {
+    justify-content: center;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Footer Colors"
+    },
+    {
+      "type": "color",
+      "id": "footer_bg_color",
+      "label": "Background color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "footer_text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "footer_heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "footer_link_color",
+      "label": "Link color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "footer_link_hover_color",
+      "label": "Link hover color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Help Section"
+    },
+    {
+      "type": "text",
+      "id": "help_heading",
+      "label": "Help heading",
+      "default": "HELP"
+    },
+    {
+      "type": "text",
+      "id": "help_link_1_text",
+      "label": "Help link 1 text",
+      "default": "You can call or email us"
+    },
+    {
+      "type": "url",
+      "id": "help_link_1_url",
+      "label": "Help link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "help_link_2_text",
+      "label": "Help link 2 text",
+      "default": "FAQ's"
+    },
+    {
+      "type": "url",
+      "id": "help_link_2_url",
+      "label": "Help link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "help_link_3_text",
+      "label": "Help link 3 text",
+      "default": "Product Care"
+    },
+    {
+      "type": "url",
+      "id": "help_link_3_url",
+      "label": "Help link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "help_link_4_text",
+      "label": "Help link 4 text",
+      "default": "Stores"
+    },
+    {
+      "type": "url",
+      "id": "help_link_4_url",
+      "label": "Help link 4 URL"
+    },
+    {
+      "type": "header",
+      "content": "Services Section"
+    },
+    {
+      "type": "text",
+      "id": "services_heading",
+      "label": "Services heading",
+      "default": "SERVICES"
+    },
+    {
+      "type": "text",
+      "id": "services_link_1_text",
+      "label": "Services link 1 text",
+      "default": "Repairs"
+    },
+    {
+      "type": "url",
+      "id": "services_link_1_url",
+      "label": "Services link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "services_link_2_text",
+      "label": "Services link 2 text",
+      "default": "Personalization"
+    },
+    {
+      "type": "url",
+      "id": "services_link_2_url",
+      "label": "Services link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "services_link_3_text",
+      "label": "Services link 3 text",
+      "default": "Art of Gifting"
+    },
+    {
+      "type": "url",
+      "id": "services_link_3_url",
+      "label": "Services link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "services_link_4_text",
+      "label": "Services link 4 text",
+      "default": "Download our Apps"
+    },
+    {
+      "type": "url",
+      "id": "services_link_4_url",
+      "label": "Services link 4 URL"
+    },
+    {
+      "type": "header",
+      "content": "About Section"
+    },
+    {
+      "type": "text",
+      "id": "about_heading",
+      "label": "About heading",
+      "default": "ABOUT FANCY PEOPLE"
+    },
+    {
+      "type": "text",
+      "id": "about_link_1_text",
+      "label": "About link 1 text",
+      "default": "Fashion Shows"
+    },
+    {
+      "type": "url",
+      "id": "about_link_1_url",
+      "label": "About link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "about_link_2_text",
+      "label": "About link 2 text",
+      "default": "Arts & Culture"
+    },
+    {
+      "type": "url",
+      "id": "about_link_2_url",
+      "label": "About link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "about_link_3_text",
+      "label": "About link 3 text",
+      "default": "La Maison"
+    },
+    {
+      "type": "url",
+      "id": "about_link_3_url",
+      "label": "About link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "about_link_4_text",
+      "label": "About link 4 text",
+      "default": "Sustainability"
+    },
+    {
+      "type": "url",
+      "id": "about_link_4_url",
+      "label": "About link 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "about_link_5_text",
+      "label": "About link 5 text",
+      "default": "Latest News"
+    },
+    {
+      "type": "url",
+      "id": "about_link_5_url",
+      "label": "About link 5 URL"
+    },
+    {
+      "type": "text",
+      "id": "about_link_6_text",
+      "label": "About link 6 text",
+      "default": "Careers"
+    },
+    {
+      "type": "url",
+      "id": "about_link_6_url",
+      "label": "About link 6 URL"
+    },
+    {
+      "type": "text",
+      "id": "about_link_7_text",
+      "label": "About link 7 text",
+      "default": "Foundation"
+    },
+    {
+      "type": "url",
+      "id": "about_link_7_url",
+      "label": "About link 7 URL"
+    },
+    {
+      "type": "header",
+      "content": "Email Signup"
+    },
+    {
+      "type": "text",
+      "id": "signup_heading",
+      "label": "Email signup heading",
+      "default": "EMAIL SIGNUP"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Newsletter description",
+      "default": "Sign up for emails and receive the latest news from the Maison, including exclusive online pre-launches and new collections"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_form",
+      "label": "Show newsletter form",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder text",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Sign up"
+    },
+    {
+      "type": "header",
+      "content": "Social Media"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_links",
+      "label": "Show social links",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "social_heading",
+      "label": "Social heading",
+      "default": "Follow Us"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "Twitter URL"
+    },
+    {
+      "type": "header",
+      "content": "Language & Legal"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_language_selector",
+      "label": "Show language selector",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "language_text",
+      "label": "Language selector text",
+      "default": "International (English)"
+    },
+    {
+      "type": "text",
+      "id": "legal_link_1_text",
+      "label": "Legal link 1 text",
+      "default": "Sitemap"
+    },
+    {
+      "type": "url",
+      "id": "legal_link_1_url",
+      "label": "Legal link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "legal_link_2_text",
+      "label": "Legal link 2 text",
+      "default": "Legal & privacy"
+    },
+    {
+      "type": "url",
+      "id": "legal_link_2_url",
+      "label": "Legal link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "legal_link_3_text",
+      "label": "Legal link 3 text",
+      "default": "Cookies"
+    },
+    {
+      "type": "url",
+      "id": "legal_link_3_url",
+      "label": "Legal link 3 URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

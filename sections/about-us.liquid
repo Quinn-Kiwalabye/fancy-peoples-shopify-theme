@@ -1,0 +1,887 @@
+<section class="about-us-section" data-section-id="{{ section.id }}" data-section-type="about-us">
+  <div class="about-us-container">
+    
+    <div class="about-us-content">
+      
+      <!-- Left Side - Image/Visual -->
+      <div class="about-us-visual">
+        {% if section.settings.image != blank %}
+          <div class="about-image">
+            <img src="{{ section.settings.image | image_url: width: 800 }}" 
+                 alt="{{ section.settings.image.alt | default: section.settings.heading }}"
+                 width="800"
+                 height="600"
+                 loading="lazy">
+          </div>
+        {% else %}
+          <div class="about-placeholder">
+            <!-- First Image - Background Card -->
+            {% if section.settings.image_1 != blank %}
+              <div class="brand-image brand-image-1">
+                <img src="{{ section.settings.image_1 | image_url: width: 400 }}" 
+                     alt="{{ section.settings.image_1.alt | default: 'Brand Image 1' }}"
+                     width="400"
+                     height="300"
+                     loading="lazy">
+              </div>
+            {% else %}
+              <div class="brand-card brand-image-1">
+                <span class="brand-initial">{{ section.settings.brand_initial | default: 'XO' }}</span>
+              </div>
+            {% endif %}
+
+            <!-- Second Image - Foreground Bag -->
+            {% if section.settings.image_2 != blank %}
+              <div class="brand-image brand-image-2">
+                <img src="{{ section.settings.image_2 | image_url: width: 350 }}" 
+                     alt="{{ section.settings.image_2.alt | default: 'Brand Image 2' }}"
+                     width="350"
+                     height="250"
+                     loading="lazy">
+              </div>
+            {% else %}
+              <div class="brand-bag brand-image-2">
+                <span class="brand-text">{{ section.settings.brand_text | default: 'WE ARE FAMILY' }}</span>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Right Side - Content -->
+      <div class="about-us-text">
+        
+        <!-- First Content Block -->
+        <div class="content-block content-block-1">
+          {% if section.settings.heading != blank %}
+            <h2 class="about-heading">{{ section.settings.heading }}</h2>
+          {% endif %}
+
+          {% if section.settings.subheading != blank %}
+            <h3 class="about-subheading">{{ section.settings.subheading }}</h3>
+          {% endif %}
+
+          {% if section.settings.description != blank %}
+            <div class="about-description">
+              {{ section.settings.description }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.button_text != blank %}
+            <div class="about-cta">
+              <a href="{{ section.settings.button_link | default: '#' }}" class="about-button">
+                {{ section.settings.button_text }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Second Content Block -->
+        <div class="content-block content-block-2">
+          {% if section.settings.heading_2 != blank %}
+            <h2 class="about-heading-2">{{ section.settings.heading_2 }}</h2>
+          {% endif %}
+
+          {% if section.settings.subheading_2 != blank %}
+            <h3 class="about-subheading-2">{{ section.settings.subheading_2 }}</h3>
+          {% endif %}
+
+          {% if section.settings.description_2 != blank %}
+            <div class="about-description-2">
+              {{ section.settings.description_2 }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.button_text_2 != blank %}
+            <div class="about-cta-2">
+              <a href="{{ section.settings.button_link_2 | default: '#' }}" class="about-button-2">
+                {{ section.settings.button_text_2 }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+
+      </div>
+
+    </div>
+    
+  </div>
+</section>
+
+<style>
+.about-us-section {
+  padding: {{ section.settings.padding_top | default: 100 }}px 0 {{ section.settings.padding_bottom | default: 100 }}px;
+  background-color: {{ section.settings.background_color | default: '#ffffff' }};
+  min-height: {{ section.settings.min_height | default: 600 }}px;
+  display: flex;
+  align-items: center;
+}
+
+.about-us-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.about-us-content {
+  display: grid;
+  grid-template-columns: {{ section.settings.layout_ratio | default: '1fr 1fr' }};
+  gap: {{ section.settings.content_gap | default: 80 }}px;
+  align-items: center;
+  min-height: 500px;
+}
+
+/* Visual Side */
+.about-us-visual {
+  position: relative;
+  height: 100%;
+  min-height: 500px;
+}
+
+.about-image {
+  width: 100%;
+  height: 100%;
+  border-radius: {{ section.settings.image_border_radius | default: 0 }}px;
+  overflow: hidden;
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-placeholder {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  position: relative;
+  border-radius: {{ section.settings.image_border_radius | default: 0 }}px;
+  overflow: hidden;
+}
+
+/* Absolute Positioned Images */
+.brand-image {
+  position: absolute;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.brand-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.brand-image-1 {
+  top: {{ section.settings.image_1_top | default: 15 }}%;
+  left: {{ section.settings.image_1_left | default: 10 }}%;
+  width: {{ section.settings.image_1_width | default: 45 }}%;
+  height: {{ section.settings.image_1_height | default: 60 }}%;
+  transform: rotate({{ section.settings.image_1_rotation | default: -8 }}deg);
+  z-index: 1;
+  /* Default visible state */
+  opacity: 1;
+  transition: transform .5s cubic-bezier(.33,0,0,1), opacity .5s cubic-bezier(.33,0,0,1);
+  transition: transform var(--duration-normal) var(--easing), opacity var(--duration-normal) var(--easing);
+  transition-delay: 0ms;
+  transition-delay: calc(var(--delay-normal) * var(--delay-offset-multiplier, 0));
+}
+
+/* Animation initial state for brand-image-1 */
+html.do-anim .animation .brand-image-1 {
+  transform: scale(1.1);
+  opacity: 0;
+}
+
+/* Animation visible state for brand-image-1 */
+html.do-anim .is-visible .brand-image-1.loaded,
+html.do-anim .is-visible .brand-image-1 {
+  opacity: 1;
+  transform: rotate({{ section.settings.image_1_rotation | default: -8 }}deg);
+}
+
+.brand-image-2 {
+  bottom: {{ section.settings.image_2_bottom | default: 10 }}%;
+  right: {{ section.settings.image_2_right | default: 15 }}%;
+  width: {{ section.settings.image_2_width | default: 40 }}%;
+  height: {{ section.settings.image_2_height | default: 50 }}%;
+  transform: rotate({{ section.settings.image_2_rotation | default: 5 }}deg);
+  z-index: 2;
+  /* Default visible state */
+  opacity: 1;
+  transition: transform .5s cubic-bezier(.33,0,0,1), opacity .5s cubic-bezier(.33,0,0,1);
+  transition: transform var(--duration-normal) var(--easing), opacity var(--duration-normal) var(--easing);
+  transition-delay: 0ms;
+  transition-delay: calc(var(--delay-normal) * var(--delay-offset-multiplier, 0));
+}
+
+/* Animation initial state for brand-image-2 */
+html.do-anim .animation .brand-image-2 {
+  transform: scale(1.1);
+  opacity: 0;
+}
+
+/* Animation visible state for brand-image-2 */
+html.do-anim .is-visible .brand-image-2.loaded,
+html.do-anim .is-visible .brand-image-2 {
+  opacity: 1;
+  transform: rotate({{ section.settings.image_2_rotation | default: 5 }}deg);
+}
+
+/* Fallback Brand Elements with Absolute Positioning */
+.brand-card {
+  position: absolute;
+  background: white;
+  padding: 50px 40px;
+  border-radius: 0;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-card.brand-image-1 {
+  top: {{ section.settings.image_1_top | default: 15 }}%;
+  left: {{ section.settings.image_1_left | default: 10 }}%;
+  width: {{ section.settings.image_1_width | default: 45 }}%;
+  height: {{ section.settings.image_1_height | default: 60 }}%;
+  transform: rotate({{ section.settings.image_1_rotation | default: -8 }}deg);
+  z-index: 1;
+}
+
+.brand-card::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.brand-initial {
+  font-size: {{ section.settings.brand_initial_size | default: 64 }}px;
+  font-weight: 300;
+  color: #000;
+  font-family: var(--font-heading-family);
+  letter-spacing: 4px;
+  line-height: 1;
+  display: block;
+}
+
+.brand-bag {
+  position: absolute;
+  background: rgba(255,255,255,0.95);
+  padding: 25px 50px;
+  border-radius: 60px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-bag.brand-image-2 {
+  bottom: {{ section.settings.image_2_bottom | default: 10 }}%;
+  right: {{ section.settings.image_2_right | default: 15 }}%;
+  width: {{ section.settings.image_2_width | default: 40 }}%;
+  height: {{ section.settings.image_2_height | default: 50 }}%;
+  transform: rotate({{ section.settings.image_2_rotation | default: 5 }}deg);
+  z-index: 2;
+}
+
+.brand-bag::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.1) 20%, rgba(0,0,0,0.1) 80%, transparent 100%);
+  border-radius: 2px;
+}
+
+.brand-bag::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 8px;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  background: transparent;
+}
+
+.brand-text {
+  font-size: {{ section.settings.brand_text_size | default: 18 }}px;
+  font-weight: 700;
+  color: #000;
+  letter-spacing: 4px;
+  font-family: var(--font-heading-family);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* Text Side */
+.about-us-text {
+  padding: {{ section.settings.text_padding | default: 40 }}px;
+  text-align: {{ section.settings.text_alignment | default: 'left' }};
+  display: flex;
+  flex-direction: column;
+  gap: {{ section.settings.content_blocks_gap | default: 60 }}px;
+}
+
+.content-block {
+  flex: 1;
+}
+
+.content-block-1 {
+  order: {{ section.settings.content_1_order | default: 1 }};
+}
+
+.content-block-2 {
+  order: {{ section.settings.content_2_order | default: 2 }};
+}
+
+/* First Content Block Styles */
+.about-heading {
+  font-size: {{ section.settings.heading_size | default: 48 }}px;
+  font-weight: {{ section.settings.heading_weight | default: 400 }};
+  color: {{ section.settings.heading_color | default: '#000000' }};
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+  letter-spacing: {{ section.settings.heading_letter_spacing | default: 1 }}px;
+  font-family: var(--font-heading-family);
+}
+
+.about-subheading {
+  font-size: {{ section.settings.subheading_size | default: 24 }}px;
+  font-weight: {{ section.settings.subheading_weight | default: 300 }};
+  color: {{ section.settings.subheading_color | default: '#000000' }};
+  margin: 0 0 30px 0;
+  line-height: 1.3;
+  letter-spacing: 0.5px;
+  font-family: var(--font-heading-family);
+}
+
+.about-description {
+  font-size: {{ section.settings.description_size | default: 16 }}px;
+  font-weight: {{ section.settings.description_weight | default: 400 }};
+  color: {{ section.settings.description_color | default: '#666666' }};
+  line-height: 1.6;
+  margin-bottom: 40px;
+  max-width: 500px;
+}
+
+.about-cta {
+  margin-top: 40px;
+}
+
+.about-button {
+  display: inline-block;
+  background-color: {{ section.settings.button_bg_color | default: '#000000' }};
+  color: {{ section.settings.button_text_color | default: '#ffffff' }};
+  padding: {{ section.settings.button_padding | default: '15px 40px' }};
+  font-size: {{ section.settings.button_font_size | default: 14 }}px;
+  font-weight: {{ section.settings.button_font_weight | default: 600 }};
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 2px solid {{ section.settings.button_border_color | default: '#000000' }};
+  border-radius: {{ section.settings.button_border_radius | default: 0 }}px;
+  transition: all 0.3s ease;
+  font-family: var(--font-body-family);
+}
+
+.about-button:hover {
+  background-color: {{ section.settings.button_hover_bg | default: 'transparent' }};
+  color: {{ section.settings.button_hover_text | default: '#000000' }};
+  transform: translateY(-2px);
+}
+
+/* Second Content Block Styles */
+.about-heading-2 {
+  font-size: {{ section.settings.heading_2_size | default: 36 }}px;
+  font-weight: {{ section.settings.heading_2_weight | default: 400 }};
+  color: {{ section.settings.heading_2_color | default: '#000000' }};
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+  letter-spacing: {{ section.settings.heading_2_letter_spacing | default: 1 }}px;
+  font-family: var(--font-heading-family);
+}
+
+.about-subheading-2 {
+  font-size: {{ section.settings.subheading_2_size | default: 20 }}px;
+  font-weight: {{ section.settings.subheading_2_weight | default: 300 }};
+  color: {{ section.settings.subheading_2_color | default: '#000000' }};
+  margin: 0 0 30px 0;
+  line-height: 1.3;
+  letter-spacing: 0.5px;
+  font-family: var(--font-heading-family);
+}
+
+.about-description-2 {
+  font-size: {{ section.settings.description_2_size | default: 14 }}px;
+  font-weight: {{ section.settings.description_2_weight | default: 400 }};
+  color: {{ section.settings.description_2_color | default: '#666666' }};
+  line-height: 1.6;
+  margin-bottom: 40px;
+  max-width: 500px;
+}
+
+.about-cta-2 {
+  margin-top: 40px;
+}
+
+.about-button-2 {
+  display: inline-block;
+  background-color: {{ section.settings.button_2_bg_color | default: 'transparent' }};
+  color: {{ section.settings.button_2_text_color | default: '#000000' }};
+  padding: {{ section.settings.button_2_padding | default: '12px 30px' }};
+  font-size: {{ section.settings.button_2_font_size | default: 12 }}px;
+  font-weight: {{ section.settings.button_2_font_weight | default: 600 }};
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 2px solid {{ section.settings.button_2_border_color | default: '#000000' }};
+  border-radius: {{ section.settings.button_2_border_radius | default: 0 }}px;
+  transition: all 0.3s ease;
+  font-family: var(--font-body-family);
+}
+
+.about-button-2:hover {
+  background-color: {{ section.settings.button_2_hover_bg | default: '#000000' }};
+  color: {{ section.settings.button_2_hover_text | default: '#ffffff' }};
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .about-us-content {
+    gap: 60px;
+  }
+  
+  .about-heading {
+    font-size: {{ section.settings.heading_size | default: 48 | minus: 8 }}px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-us-section {
+    padding: {{ section.settings.padding_top | default: 100 | divided_by: 2 }}px 0 {{ section.settings.padding_bottom | default: 100 | divided_by: 2 }}px;
+  }
+  
+  .about-us-container {
+    padding: 0 15px;
+  }
+  
+  .about-us-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  
+  .about-us-visual {
+    min-height: 400px;
+    order: {{ section.settings.mobile_image_order | default: -1 }};
+  }
+  
+  .about-us-text {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .about-heading {
+    font-size: {{ section.settings.heading_size | default: 48 | minus: 16 }}px;
+  }
+  
+  .about-subheading {
+    font-size: {{ section.settings.subheading_size | default: 24 | minus: 4 }}px;
+  }
+  
+  .brand-initial {
+    font-size: 36px;
+  }
+  
+  .brand-text {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-heading {
+    font-size: {{ section.settings.heading_size | default: 48 | minus: 20 }}px;
+  }
+  
+  .about-description {
+    font-size: {{ section.settings.description_size | default: 16 | minus: 2 }}px;
+  }
+  
+  .about-us-visual {
+    min-height: 300px;
+  }
+  
+  .brand-card {
+    padding: 30px 20px;
+  }
+  
+  .brand-initial {
+    font-size: 30px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "About Us",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Block 1"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main heading",
+      "default": "WELCOME TO OUR HOUSE"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Bringing the best of international luxury to a discerning South African market</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "MEET THE FAMILY"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Content Block 2"
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Second heading",
+      "default": "OUR STORY"
+    },
+    {
+      "type": "text",
+      "id": "subheading_2",
+      "label": "Second subheading"
+    },
+    {
+      "type": "richtext",
+      "id": "description_2",
+      "label": "Second description",
+      "default": "<p>Discover the heritage and craftsmanship behind every creation</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text_2",
+      "label": "Second button text",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Second button link"
+    },
+    {
+      "type": "header",
+      "content": "Visual Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Single main image (overrides dual images)"
+    },
+    {
+      "type": "header",
+      "content": "Dual Images Setup"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "First image (background)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Second image (foreground)"
+    },
+    {
+      "type": "text",
+      "id": "brand_initial",
+      "label": "Brand initial (fallback for image 1)",
+      "default": "XO"
+    },
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Brand text (fallback for image 2)",
+      "default": "WE ARE FAMILY"
+    },
+    {
+      "type": "header",
+      "content": "Image 1 Positioning"
+    },
+    {
+      "type": "range",
+      "id": "image_1_top",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Image 1 top position",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "image_1_left",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "%",
+      "label": "Image 1 left position",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "image_1_width",
+      "min": 30,
+      "max": 60,
+      "step": 1,
+      "unit": "%",
+      "label": "Image 1 width",
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "image_1_height",
+      "min": 40,
+      "max": 80,
+      "step": 1,
+      "unit": "%",
+      "label": "Image 1 height",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "image_1_rotation",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "deg",
+      "label": "Image 1 rotation",
+      "default": -8
+    },
+    {
+      "type": "header",
+      "content": "Image 2 Positioning"
+    },
+    {
+      "type": "range",
+      "id": "image_2_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Image 2 bottom position",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "image_2_right",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "%",
+      "label": "Image 2 right position",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "image_2_width",
+      "min": 25,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Image 2 width",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "image_2_height",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "label": "Image 2 height",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "image_2_rotation",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "deg",
+      "label": "Image 2 rotation",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout_ratio",
+      "label": "Layout ratio",
+      "options": [
+        { "value": "1fr 1fr", "label": "50/50" },
+        { "value": "1fr 1.5fr", "label": "40/60" },
+        { "value": "1.5fr 1fr", "label": "60/40" }
+      ],
+      "default": "1fr 1fr"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "min": 20,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Content gap",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "content_blocks_gap",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Gap between content blocks",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "text_padding",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Text padding",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "content_1_order",
+      "label": "Content block 1 order",
+      "options": [
+        { "value": "1", "label": "First" },
+        { "value": "2", "label": "Second" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "select",
+      "id": "content_2_order",
+      "label": "Content block 2 order",
+      "options": [
+        { "value": "1", "label": "First" },
+        { "value": "2", "label": "Second" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_order",
+      "label": "Mobile image position",
+      "options": [
+        { "value": "-1", "label": "Above text" },
+        { "value": "1", "label": "Below text" }
+      ],
+      "default": "-1"
+    },
+    {
+      "type": "header",
+      "content": "Section Design"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "min": 400,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Minimum height",
+      "default": 600
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

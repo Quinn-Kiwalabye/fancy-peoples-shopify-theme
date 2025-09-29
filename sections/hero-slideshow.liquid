@@ -1,0 +1,964 @@
+{% comment %}
+  Hero Slideshow Section
+  Creates a modern slideshow with pure CSS and JavaScript
+{% endcomment %}
+
+<div class="slideshow-container" id="slideshow-{{ section.id }}" data-autoplay="{{ section.settings.autoplay }}" data-autoplay-speed="{{ section.settings.autoplay_speed }}">
+  <div class="slideshow" data-slides-count="{{ section.blocks.size }}">
+    <div class="slideshow-wrapper">
+      {% for block in section.blocks %}
+        <div class="slideshow-slide" 
+             style="--text-horizontal-position: {{ block.settings.text_horizontal_position }}; 
+                    --text-vertical-position: {{ block.settings.text_vertical_position }}; 
+                    --text-alignment: {{ block.settings.text_alignment }}; 
+                    --text-horizontal-position-mobile: {{ block.settings.text_horizontal_position_mobile }}; 
+                    --text-vertical-position-mobile: {{ block.settings.text_vertical_position_mobile }}; 
+                    --text-alignment-mobile: {{ block.settings.text_alignment_mobile }}; 
+                    --color-text: {{ block.settings.color_text }}; 
+                    --color-text-link: {{ block.settings.color_text_link }}; 
+                    --overlay-background: {{ block.settings.overlay_background }}; 
+                    --overlay-opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }}; 
+                    --color-text-overlay-button: {{ block.settings.color_text_overlay_button }}; 
+                    --color-background-overlay-button: {{ block.settings.color_background_overlay_button }}; 
+                    --color-background-overlay-button-hover: {{ block.settings.color_background_overlay_button_hover }};"
+             data-slide="{{ forloop.index }}" 
+             data-bullet-label="Move carousel to slide {{ forloop.index }}" 
+             {{ block.shopify_attributes }}>
+          
+          <div class="slideshow-slide__inner">
+            <div class="slideshow-slide__media-container">
+              {% comment %} Video Support {% endcomment %}
+              {% if block.settings.video_url != blank %}
+                <div class="slideshow-slide__video">
+                  {% if block.settings.video_url contains 'youtube.com' or block.settings.video_url contains 'youtu.be' %}
+                    {% assign video_id = block.settings.video_url | split: '/' | last | split: '?' | first | split: '&' | first %}
+                    {% if block.settings.video_url contains 'youtu.be' %}
+                      {% assign video_id = block.settings.video_url | split: '/' | last | split: '?' | first %}
+                    {% elsif block.settings.video_url contains 'watch?v=' %}
+                      {% assign video_id = block.settings.video_url | split: 'watch?v=' | last | split: '&' | first %}
+                    {% endif %}
+                    <iframe 
+                      src="https://www.youtube.com/embed/{{ video_id }}?autoplay=1&mute=1&loop=1&playlist={{ video_id }}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+                      frameborder="0" 
+                      allow="autoplay; encrypted-media" 
+                      allowfullscreen
+                      class="slideshow-video__iframe">
+                    </iframe>
+                  {% elsif block.settings.video_url contains 'vimeo.com' %}
+                    {% assign video_id = block.settings.video_url | split: '/' | last %}
+                    <iframe 
+                      src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1&muted=1&loop=1&background=1&controls=0"
+                      frameborder="0" 
+                      allow="autoplay; fullscreen; picture-in-picture" 
+                      allowfullscreen
+                      class="slideshow-video__iframe">
+                    </iframe>
+                  {% else %}
+                    {% comment %} Direct video file {% endcomment %}
+                    <video 
+                      class="slideshow-video__native" 
+                      autoplay 
+                      muted 
+                      loop 
+                      playsinline
+                      {% if block.settings.video_poster %}poster="{{ block.settings.video_poster | image_url: width: 1920 }}"{% endif %}>
+                      {% if block.settings.video_file %}
+                        <source src="{{ block.settings.video_file | asset_url }}" type="video/mp4">
+                      {% elsif block.settings.video_url != blank %}
+                        <source src="{{ block.settings.video_url | escape }}" type="video/mp4">
+                      {% endif %}
+                      Your browser does not support the video tag.
+                    </video>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% comment %} Image Support - Only show if no video {% endcomment %}
+              {% if block.settings.image %}
+                {% unless block.settings.video_url != blank %}
+                <div class="slideshow-slide__image image--animate animation--lazy-load" 
+                     style="--focal-alignment: {{ block.settings.focal_alignment }};">
+                  <img alt="{{ block.settings.image.alt | escape }}" 
+                       class="image__img" 
+                       loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" 
+                       width="{{ block.settings.image.width }}" 
+                       height="{{ block.settings.image.height }}" 
+                       src="{{ block.settings.image | image_url: width: 320 }}" 
+                       srcset="{{ block.settings.image | image_url: width: 100 }} 100w,
+                               {{ block.settings.image | image_url: width: 150 }} 150w,
+                               {{ block.settings.image | image_url: width: 200 }} 200w,
+                               {{ block.settings.image | image_url: width: 240 }} 240w,
+                               {{ block.settings.image | image_url: width: 280 }} 280w,
+                               {{ block.settings.image | image_url: width: 300 }} 300w,
+                               {{ block.settings.image | image_url: width: 360 }} 360w,
+                               {{ block.settings.image | image_url: width: 400 }} 400w,
+                               {{ block.settings.image | image_url: width: 450 }} 450w,
+                               {{ block.settings.image | image_url: width: 500 }} 500w,
+                               {{ block.settings.image | image_url: width: 550 }} 550w,
+                               {{ block.settings.image | image_url: width: 600 }} 600w,
+                               {{ block.settings.image | image_url: width: 650 }} 650w,
+                               {{ block.settings.image | image_url: width: 700 }} 700w,
+                               {{ block.settings.image | image_url: width: 750 }} 750w,
+                               {{ block.settings.image | image_url: width: 800 }} 800w,
+                               {{ block.settings.image | image_url: width: 850 }} 850w,
+                               {{ block.settings.image | image_url: width: 900 }} 900w,
+                               {{ block.settings.image | image_url: width: 950 }} 950w,
+                               {{ block.settings.image | image_url: width: 1000 }} 1000w,
+                               {{ block.settings.image | image_url: width: 1100 }} 1100w,
+                               {{ block.settings.image | image_url: width: 1200 }} 1200w,
+                               {{ block.settings.image | image_url: width: 1300 }} 1300w,
+                               {{ block.settings.image | image_url: width: 1400 }} 1400w,
+                               {{ block.settings.image | image_url: width: 1500 }} 1500w,
+                               {{ block.settings.image | image_url: width: 1600 }} 1600w,
+                               {{ block.settings.image | image_url: width: 1800 }} 1800w,
+                               {{ block.settings.image | image_url: width: 2000 }} 2000w,
+                               {{ block.settings.image | image_url: width: 2400 }} 2400w" 
+                       sizes="100vw" 
+                       onload="javascript: this.closest('.slideshow-slide__image').classList.add('loaded')">
+                </div>
+                {% endunless %}
+              {% endif %}
+
+              {% comment %} Fallback placeholder {% endcomment %}
+              {% unless block.settings.image or block.settings.video_url != blank %}
+                <div class="slideshow-slide__placeholder">
+                  <div class="placeholder-content">
+                    <div class="placeholder-icon">
+                      <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21,15 16,10 5,21"/>
+                      </svg>
+                    </div>
+                    <h3>Slide {{ forloop.index }}</h3>
+                    <p>Add an image or video to get started</p>
+                  </div>
+                </div>
+              {% endunless %}
+            </div>
+            
+            <div class="slideshow-slide__overlay"></div>
+
+            <div class="slideshow-slide__text-container-wrapper">
+              <div class="slideshow-slide__text-container">
+                <div class="slideshow-slide__text-container-inner section-blocks animation--section-blocks">
+                  {% if block.settings.heading != blank %}
+                    <h2 class="slideshow-slide__heading">{{ block.settings.heading }}</h2>
+                  {% endif %}
+                  
+                  {% if block.settings.subheading != blank %}
+                    <p class="slideshow-slide__subheading">{{ block.settings.subheading }}</p>
+                  {% endif %}
+                  
+                  {% if block.settings.button_text != blank %}
+                    <a href="{{ block.settings.button_link | default: '#' }}" 
+                       class="slideshow-slide__button button button--primary">
+                      {{ block.settings.button_text }}
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.blocks.size > 1 %}
+      <!-- Navigation -->
+      {% if section.settings.show_navigation %}
+        <div class="slideshow-navigation">
+          <button class="slideshow-nav slideshow-nav--prev" aria-label="Previous slide" onclick="changeSlide(-1)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="slideshow-nav slideshow-nav--next" aria-label="Next slide" onclick="changeSlide(1)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      {% endif %}
+
+      <!-- Pagination -->
+      {% if section.settings.show_pagination %}
+        <div class="slideshow-pagination">
+          {% for block in section.blocks %}
+            <button class="pagination-dot{% if forloop.first %} active{% endif %}" onclick="goToSlide({{ forloop.index0 }})" aria-label="Go to slide {{ forloop.index }}"></button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .slideshow-container {
+    position: relative;
+    width: 100%;
+    height: {{ section.settings.height_desktop }}px;
+    overflow: hidden;
+  }
+
+  .slideshow {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slideshow-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .slideshow-slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slideshow-slide__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slideshow-slide__media-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .slideshow-slide__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .slideshow-video__iframe,
+  .slideshow-video__native {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    border: none;
+  }
+
+  /* Ensure video covers the container properly */
+  .slideshow-video__iframe {
+    width: calc(100% + 200px);
+    height: calc(100% + 200px);
+    margin: -100px;
+  }
+
+  .slideshow-slide__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .slideshow-slide__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--focal-alignment, center);
+  }
+
+  .slideshow-slide__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #f8f8f8;
+    color: #666;
+  }
+
+  .placeholder-content {
+    text-align: center;
+    max-width: 300px;
+  }
+
+  .placeholder-icon {
+    margin-bottom: 1rem;
+    opacity: 0.7;
+  }
+
+  .placeholder-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #999;
+  }
+
+  .placeholder-content p {
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+
+  .slideshow-slide__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--overlay-background);
+    opacity: var(--overlay-opacity);
+    z-index: 1;
+  }
+
+  .slideshow-slide__text-container-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: var(--text-vertical-position);
+    justify-content: var(--text-horizontal-position);
+    z-index: 2;
+    padding: 2rem;
+  }
+
+  .slideshow-slide__text-container {
+    text-align: var(--text-alignment);
+    color: var(--color-text);
+    max-width: 600px;
+  }
+
+  .slideshow-slide__heading {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .slideshow-slide__subheading {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .slideshow-slide__button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--color-background-overlay-button);
+    color: var(--color-text-overlay-button);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .slideshow-slide__button:hover {
+    background: var(--color-background-overlay-button-hover);
+  }
+
+  .slideshow-navigation {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    transform: translateY(-50%);
+  }
+
+  .slideshow-nav {
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .slideshow-nav:hover {
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .slideshow-pagination {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .pagination-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .pagination-dot.active,
+  .pagination-dot:hover {
+    background: rgba(255, 255, 255, 1);
+  }
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .slideshow-container {
+      height: {{ section.settings.height_mobile }}px;
+    }
+
+    .slideshow-slide__text-container-wrapper {
+      align-items: var(--text-vertical-position-mobile);
+      justify-content: var(--text-horizontal-position-mobile);
+      padding: 1rem;
+    }
+
+    .slideshow-slide__text-container {
+      text-align: var(--text-alignment-mobile);
+    }
+
+    .slideshow-slide__heading {
+      font-size: 2rem;
+    }
+
+    .slideshow-slide__subheading {
+      font-size: 1rem;
+    }
+  }
+
+  /* Image loading animation */
+  .image {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .image.loaded {
+    opacity: 1;
+  }
+</style>
+
+<script>
+(function() {
+  const slideshowId = 'slideshow-{{ section.id }}';
+  let currentSlide = 0;
+  let totalSlides = {{ section.blocks.size }};
+  let autoplayInterval;
+  let isAutoplay = {{ section.settings.autoplay | json }};
+  let autoplaySpeed = {{ section.settings.autoplay_speed | times: 1000 }};
+  
+  function updateSlidePosition() {
+    const wrapper = document.querySelector('#' + slideshowId + ' .slideshow-wrapper');
+    const dots = document.querySelectorAll('#' + slideshowId + ' .pagination-dot');
+    
+    if (wrapper) {
+      wrapper.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    }
+    
+    // Update pagination dots
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentSlide);
+    });
+    
+    // Handle video playback
+    const slides = document.querySelectorAll('#' + slideshowId + ' .slideshow-slide');
+    slides.forEach((slide, index) => {
+      const video = slide.querySelector('video');
+      if (video) {
+        if (index === currentSlide) {
+          video.play().catch(e => console.log('Video autoplay prevented'));
+        } else {
+          video.pause();
+        }
+      }
+    });
+  }
+  
+  window.changeSlide = function(direction) {
+    currentSlide += direction;
+    
+    if (currentSlide >= totalSlides) {
+      currentSlide = {{ section.settings.loop | json }} ? 0 : totalSlides - 1;
+    } else if (currentSlide < 0) {
+      currentSlide = {{ section.settings.loop | json }} ? totalSlides - 1 : 0;
+    }
+    
+    updateSlidePosition();
+    resetAutoplay();
+  };
+  
+  window.goToSlide = function(slideIndex) {
+    currentSlide = slideIndex;
+    updateSlidePosition();
+    resetAutoplay();
+  };
+  
+  function startAutoplay() {
+    if (isAutoplay && totalSlides > 1) {
+      autoplayInterval = setInterval(() => {
+        changeSlide(1);
+      }, autoplaySpeed);
+    }
+  }
+  
+  function stopAutoplay() {
+    if (autoplayInterval) {
+      clearInterval(autoplayInterval);
+    }
+  }
+  
+  function resetAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+  
+  function initSlideshow() {
+    const container = document.getElementById(slideshowId);
+    if (!container) return;
+    
+    updateSlidePosition();
+    startAutoplay();
+    
+    // Pause on hover if enabled
+    {% if section.settings.pause_on_hover %}
+    container.addEventListener('mouseenter', stopAutoplay);
+    container.addEventListener('mouseleave', startAutoplay);
+    {% endif %}
+    
+    // Touch/swipe support
+    let startX = 0;
+    let isDragging = false;
+    
+    container.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    });
+    
+    container.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+      
+      if (Math.abs(diff) > 50) { // Minimum swipe distance
+        if (diff > 0) {
+          changeSlide(1); // Swipe left = next
+        } else {
+          changeSlide(-1); // Swipe right = previous
+        }
+      }
+      
+      isDragging = false;
+    });
+    
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        changeSlide(-1);
+      } else if (e.key === 'ArrowRight') {
+        changeSlide(1);
+      }
+    });
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSlideshow);
+  } else {
+    initSlideshow();
+  }
+  
+  // Re-initialize when section is reloaded in theme editor
+  document.addEventListener('shopify:section:load', function(event) {
+    if (event.target.querySelector('#' + slideshowId)) {
+      setTimeout(initSlideshow, 100);
+    }
+  });
+  
+  // Clean up on section unload
+  document.addEventListener('shopify:section:unload', function(event) {
+    if (event.target.querySelector('#' + slideshowId)) {
+      stopAutoplay();
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Hero Slideshow",
+  "tag": "section",
+  "class": "section-slideshow",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Slideshow Settings"
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "label": "Desktop Height",
+      "min": 400,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "label": "Mobile Height",
+      "min": 300,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed",
+      "min": 2,
+      "max": 15,
+      "step": 0.5,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "transition_speed",
+      "label": "Transition speed",
+      "min": 0.3,
+      "max": 2.0,
+      "step": 0.1,
+      "unit": "s",
+      "default": 0.8
+    },
+    {
+      "type": "select",
+      "id": "transition_effect",
+      "label": "Transition Effect",
+      "options": [
+        { "value": "slide", "label": "Slide" },
+        { "value": "fade", "label": "Fade" },
+        { "value": "cube", "label": "Cube" },
+        { "value": "coverflow", "label": "Coverflow" }
+      ],
+      "default": "slide"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Show navigation arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "Show pagination dots",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Media (Video or Image)"
+        },
+        {
+          "type": "paragraph",
+          "content": "Choose either a video OR an image. Video will take priority if both are added."
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Video URL",
+          "info": "Supports YouTube, Vimeo, or direct MP4 links. Example: https://www.youtube.com/watch?v=VIDEO_ID"
+        },
+        {
+          "type": "video",
+          "id": "video_file",
+          "label": "Video File Upload",
+          "info": "Upload MP4 video file (recommended for better performance)"
+        },
+        {
+          "type": "image_picker",
+          "id": "video_poster",
+          "label": "Video Poster Image",
+          "info": "Fallback image for video (optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slide Image",
+          "info": "Will be used if no video is provided"
+        },
+        {
+          "type": "select",
+          "id": "focal_alignment",
+          "label": "Image focal point",
+          "options": [
+            { "value": "top", "label": "Top" },
+            { "value": "center", "label": "Center" },
+            { "value": "bottom", "label": "Bottom" },
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "header",
+          "content": "Desktop Text Position"
+        },
+        {
+          "type": "select",
+          "id": "text_horizontal_position",
+          "label": "Horizontal position",
+          "options": [
+            { "value": "flex-start", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "flex-end", "label": "Right" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "text_vertical_position",
+          "label": "Vertical position",
+          "options": [
+            { "value": "flex-start", "label": "Top" },
+            { "value": "center", "label": "Center" },
+            { "value": "flex-end", "label": "Bottom" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "text_alignment",
+          "label": "Text alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "header",
+          "content": "Mobile Text Position"
+        },
+        {
+          "type": "select",
+          "id": "text_horizontal_position_mobile",
+          "label": "Mobile horizontal position",
+          "options": [
+            { "value": "flex-start", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "flex-end", "label": "Right" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "text_vertical_position_mobile",
+          "label": "Mobile vertical position",
+          "options": [
+            { "value": "flex-start", "label": "Top" },
+            { "value": "center", "label": "Center" },
+            { "value": "flex-end", "label": "Bottom" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "text_alignment_mobile",
+          "label": "Mobile text alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "color_text",
+          "label": "Text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "color_text_link",
+          "label": "Link color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "overlay_background",
+          "label": "Overlay color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "label": "Overlay opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "color_text_overlay_button",
+          "label": "Button text color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "color_background_overlay_button",
+          "label": "Button background color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "color_background_overlay_button_hover",
+          "label": "Button hover color",
+          "default": "#ededed"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Slideshow",
+      "settings": {
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "loop": true,
+        "show_navigation": true,
+        "show_pagination": true,
+        "transition_effect": "slide"
+      },
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Welcome to Fancy Peoples",
+            "subheading": "Discover our luxury collection of premium products crafted with excellence",
+            "button_text": "Shop Now",
+            "button_link": "/collections/all",
+            "text_alignment": "center",
+            "text_vertical_position": "center",
+            "color_text": "#ffffff",
+            "overlay_opacity": 30
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "New Collection",
+            "subheading": "Explore the latest trends and timeless designs",
+            "button_text": "Explore Collection",
+            "button_link": "/collections/new",
+            "text_alignment": "left",
+            "text_vertical_position": "center",
+            "text_horizontal_position": "flex-start",
+            "color_text": "#ffffff",
+            "overlay_opacity": 20
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "video_url": "",
+            "heading": "Premium Quality",
+            "subheading": "Every piece is crafted with attention to detail and superior materials",
+            "button_text": "Learn More",
+            "button_link": "/pages/about",
+            "text_alignment": "center",
+            "text_vertical_position": "flex-end",
+            "color_text": "#ffffff",
+            "overlay_opacity": 40
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
