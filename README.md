@@ -2,10 +2,10 @@
   <br>
     <img src="./assets/shoppy-x-ray.svg" alt="logo" width="200">
   <br>
-  Shopify Skeleton Theme
+  Fancy Peoples Shopify Theme
 </h1>
 
-A minimal, carefully structured Shopify theme designed to help you quickly get started. Designed with modularity, maintainability, and Shopify's best practices in mind.
+A luxury Shopify theme designed for premium fashion and lifestyle brands. Features modern animations, responsive design, and comprehensive customization options.
 
 <p align="center">
   <a href="./LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
@@ -29,17 +29,32 @@ If you use VS Code:
 Clone this repository using Git or Shopify CLI:
 
 ```bash
-git clone git@github.com:Shopify/skeleton-theme.git
-# or
-shopify theme init
+git clone git@github.com:Quinn-Kiwalabye/fancy-peoples-shopify-theme.git
 ```
+
+## 🌟 Custom Sections
+
+### Hero Slideshow
+- **Image & Video Support** - Upload images or embed YouTube/Vimeo videos
+- **Auto-play & Navigation** - Touch/swipe controls with pagination dots
+- **Fully Customizable** - Text positioning, colors, overlays, and timing
+
+### Featured Collections  
+- **4-Column Layout** - Responsive product category showcase
+- **Hover Effects** - Modern animations and transitions
+- **Easy Management** - Link to collections with custom images
+
+### About Us
+- **Dual Images** - Overlapping positioned images with rotations
+- **Content Blocks** - Multiple text blocks with flexible positioning
+- **Scroll Animations** - Smooth scale-in effects on scroll
 
 ### Preview
 
 Preview this theme using Shopify CLI:
 
 ```bash
-shopify theme dev
+shopify theme dev --store=your-store.myshopify.com
 ```
 
 ## Theme architecture
