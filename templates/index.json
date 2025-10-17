@@ -9,12 +9,184 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
-      "settings": {}
+    "hero_pxyCUx": {
+      "type": "hero",
+      "name": "Hero Banner",
+      "settings": {
+        "heading": "Introducing Fancy People",
+        "button_1_label": "SHOP WOMEN",
+        "button_1_link": "",
+        "button_2_label": "SHOP MEN",
+        "button_2_link": ""
+      }
+    },
+    "hero_slideshow_QPzjp3": {
+      "type": "hero-slideshow",
+      "blocks": {
+        "slide_WpH7ct": {
+          "type": "slide",
+          "settings": {
+            "video_url": "",
+            "focal_alignment": "center",
+            "heading": "Welcome to Fancy Peoples",
+            "subheading": "Discover our luxury collection of premium products crafted with excellence",
+            "button_text": "Shop Now",
+            "button_link": "/collections/all",
+            "text_horizontal_position": "center",
+            "text_vertical_position": "center",
+            "text_alignment": "center",
+            "text_horizontal_position_mobile": "center",
+            "text_vertical_position_mobile": "center",
+            "text_alignment_mobile": "center",
+            "color_text": "#ffffff",
+            "color_text_link": "#ffffff",
+            "overlay_background": "#000000",
+            "overlay_opacity": 30,
+            "color_text_overlay_button": "#000000",
+            "color_background_overlay_button": "#ffffff",
+            "color_background_overlay_button_hover": "#ededed"
+          }
+        },
+        "slide_WLNQ6G": {
+          "type": "slide",
+          "settings": {
+            "video_url": "",
+            "focal_alignment": "center",
+            "heading": "New Collection",
+            "subheading": "Explore the latest trends and timeless designs",
+            "button_text": "Explore Collection",
+            "button_link": "/collections/new",
+            "text_horizontal_position": "flex-start",
+            "text_vertical_position": "center",
+            "text_alignment": "left",
+            "text_horizontal_position_mobile": "center",
+            "text_vertical_position_mobile": "center",
+            "text_alignment_mobile": "center",
+            "color_text": "#ffffff",
+            "color_text_link": "#ffffff",
+            "overlay_background": "#000000",
+            "overlay_opacity": 20,
+            "color_text_overlay_button": "#000000",
+            "color_background_overlay_button": "#ffffff",
+            "color_background_overlay_button_hover": "#ededed"
+          }
+        },
+        "slide_zxGCJm": {
+          "type": "slide",
+          "settings": {
+            "video_url": "",
+            "focal_alignment": "center",
+            "heading": "Premium Quality",
+            "subheading": "Every piece is crafted with attention to detail and superior materials",
+            "button_text": "Learn More",
+            "button_link": "/pages/about",
+            "text_horizontal_position": "center",
+            "text_vertical_position": "flex-end",
+            "text_alignment": "center",
+            "text_horizontal_position_mobile": "center",
+            "text_vertical_position_mobile": "center",
+            "text_alignment_mobile": "center",
+            "color_text": "#ffffff",
+            "color_text_link": "#ffffff",
+            "overlay_background": "#000000",
+            "overlay_opacity": 40,
+            "color_text_overlay_button": "#000000",
+            "color_background_overlay_button": "#ffffff",
+            "color_background_overlay_button_hover": "#ededed"
+          }
+        }
+      },
+      "block_order": [
+        "slide_WpH7ct",
+        "slide_WLNQ6G",
+        "slide_zxGCJm"
+      ],
+      "name": "Hero Slideshow",
+      "settings": {
+        "height_desktop": 600,
+        "height_mobile": 400,
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "pause_on_hover": true,
+        "loop": true,
+        "transition_speed": 0.8,
+        "transition_effect": "slide",
+        "show_navigation": true,
+        "show_pagination": true
+      }
+    },
+    "featured_collections_En4VcM": {
+      "type": "featured-collections",
+      "name": "Featured Collections",
+      "settings": {
+        "heading": "Explore a Selection of the Maison's Creations",
+        "collection_1": "",
+        "beauty_title": "Beauty",
+        "collection_2": "",
+        "handbags_title": "Women's Handbags",
+        "collection_3": "",
+        "wallets_title": "Women's Wallets and Small Leather Goods",
+        "collection_4": "",
+        "shoes_title": "Women's Shoes",
+        "background_color": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "grid_gap": 30,
+        "image_border_radius": 0,
+        "heading_size": 32,
+        "heading_weight": "300",
+        "heading_color": "#000000",
+        "title_size": 18,
+        "title_weight": "400",
+        "title_color": "#333333",
+        "title_hover_color": "#000000"
+      }
+    },
+    "about_us_4wLVEk": {
+      "type": "about-us",
+      "name": "About Us",
+      "settings": {
+        "heading": "WELCOME TO OUR HOUSE",
+        "subheading": "",
+        "description": "<p>Bringing the best of international luxury to a discerning South African market</p>",
+        "button_text": "MEET THE FAMILY",
+        "button_link": "",
+        "heading_2": "OUR STORY",
+        "subheading_2": "",
+        "description_2": "<p>Discover the heritage and craftsmanship behind every creation</p>",
+        "button_text_2": "LEARN MORE",
+        "button_link_2": "",
+        "brand_initial": "XO",
+        "brand_text": "WE ARE FAMILY",
+        "image_1_top": 15,
+        "image_1_left": 10,
+        "image_1_width": 45,
+        "image_1_height": 60,
+        "image_1_rotation": -8,
+        "image_2_bottom": 10,
+        "image_2_right": 15,
+        "image_2_width": 40,
+        "image_2_height": 50,
+        "image_2_rotation": 5,
+        "layout_ratio": "1fr 1fr",
+        "text_alignment": "left",
+        "content_gap": 80,
+        "content_blocks_gap": 60,
+        "text_padding": 40,
+        "content_1_order": "1",
+        "content_2_order": "2",
+        "mobile_image_order": "-1",
+        "background_color": "#ffffff",
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "min_height": 600
+      }
     }
   },
   "order": [
-    "main"
+    "hero_pxyCUx",
+    "hero_slideshow_QPzjp3",
+    "featured_collections_En4VcM",
+    "about_us_4wLVEk"
   ]
 }
