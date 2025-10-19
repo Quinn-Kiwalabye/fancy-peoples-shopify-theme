@@ -13,6 +13,7 @@
       "type": "hero",
       "name": "Hero Banner",
       "settings": {
+        "image": "shopify://shop_images/man-and-woman-in-fancy-dress-pose-on-couch.jpg",
         "heading": "Introducing Fancy People",
         "button_1_label": "SHOP WOMEN",
         "button_1_link": "",
@@ -26,7 +27,7 @@
         "slide_WpH7ct": {
           "type": "slide",
           "settings": {
-            "video_url": "",
+            "video_url": "https://youtu.be/IYTPGUnL9g0?si=Gc6Vbj7A-GWlPpOG",
             "focal_alignment": "center",
             "heading": "Welcome to Fancy Peoples",
             "subheading": "Discover our luxury collection of premium products crafted with excellence",
@@ -50,7 +51,7 @@
         "slide_WLNQ6G": {
           "type": "slide",
           "settings": {
-            "video_url": "",
+            "video_url": "https://youtu.be/4dALcwXpGzI?si=t11vEO12ot8UZJM9",
             "focal_alignment": "center",
             "heading": "New Collection",
             "subheading": "Explore the latest trends and timeless designs",
@@ -74,7 +75,7 @@
         "slide_zxGCJm": {
           "type": "slide",
           "settings": {
-            "video_url": "",
+            "video_url": "https://youtu.be/xI2znsBDSDk?si=uW38zQqvSj7O2WDc&t=8",
             "focal_alignment": "center",
             "heading": "Premium Quality",
             "subheading": "Every piece is crafted with attention to detail and superior materials",
@@ -109,7 +110,7 @@
         "autoplay_speed": 5,
         "pause_on_hover": true,
         "loop": true,
-        "transition_speed": 0.8,
+        "transition_speed": 1.1,
         "transition_effect": "slide",
         "show_navigation": true,
         "show_pagination": true
@@ -121,14 +122,18 @@
       "settings": {
         "heading": "Explore a Selection of the Maison's Creations",
         "collection_1": "",
+        "beauty_image": "shopify://shop_images/beauty-flatlay.jpg",
         "beauty_title": "Beauty",
         "collection_2": "",
+        "handbags_image": "shopify://shop_images/stylish-skirt-purse.jpg",
         "handbags_title": "Women's Handbags",
         "collection_3": "",
+        "wallets_image": "shopify://shop_images/brown-purse-with-shoulder-strap.jpg",
         "wallets_title": "Women's Wallets and Small Leather Goods",
         "collection_4": "",
+        "shoes_image": "shopify://shop_images/loafers-leaning-along-white-wall.jpg",
         "shoes_title": "Women's Shoes",
-        "background_color": "#ffffff",
+        "background_color": "#ededed",
         "padding_top": 80,
         "padding_bottom": 80,
         "grid_gap": 30,
@@ -156,6 +161,8 @@
         "description_2": "<p>Discover the heritage and craftsmanship behind every creation</p>",
         "button_text_2": "LEARN MORE",
         "button_link_2": "",
+        "image_1": "shopify://shop_images/young-woman-model-portrait.jpg",
+        "image_2": "shopify://shop_images/fashion-model-in-pink.jpg",
         "brand_initial": "XO",
         "brand_text": "WE ARE FAMILY",
         "image_1_top": 15,
